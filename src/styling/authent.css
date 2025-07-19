@@ -1,0 +1,116 @@
+.auth-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid var(--accent-light);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 2px var(--accent-light);
+  background-color: white;
+}
+
+/* Placeholder styling */
+.form-group input::placeholder {
+  color: rgba(148, 137, 121, 0.6);
+  opacity: 1;
+}
+
+.form-group input::-webkit-input-placeholder {
+  color: rgba(148, 137, 121, 0.6);
+  opacity: 1;
+}
+
+.form-group input::-moz-placeholder {
+  color: rgba(148, 137, 121, 0.6);
+  opacity: 1;
+}
+
+.form-group input:-ms-input-placeholder {
+  color: rgba(148, 137, 121, 0.6);
+  opacity: 1;
+}
+
+.auth-form button {
+  background-color: var(--text-primary);
+  color: var(--header);
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.auth-form button:hover {
+  background-color: var(--text-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form button:active {
+  transform: translateY(0);
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.auth-link a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.auth-link a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}

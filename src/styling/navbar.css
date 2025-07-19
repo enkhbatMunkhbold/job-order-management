@@ -1,0 +1,134 @@
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #948979;
+  color: var(--header);
+  padding: 0 2rem;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.navbar a {
+  color: var(--header);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(187, 154, 247, 0.5);
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-button {
+  background-color: transparent;
+  color: var(--header);
+  border: 2px solid var(--header);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  background-color: var(--header);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+.home_button {
+  background-color: transparent;
+  color: var(--header);
+  border: 2px solid var(--header);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+}
+
+.home_button:hover {
+  background-color: var(--header);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home_button:active {
+  transform: translateY(0);
+}
+
+link, .signout-button {
+  background-color: transparent;
+  color: var(--header);
+  border: 2px solid var(--header);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  margin-left: auto;
+}
+
+.signout-button:hover {
+  background-color: var(--header);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signout-button:active {
+  transform: translateY(0);
+}
+
+.navbar-divider {
+  height: 5px;
+  background-color: white;
+  border: none;
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

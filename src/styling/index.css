@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+:root {
+  --bg: #f0f2f5;  /* Light gray background */
+  --navbar-bg: #1a1b26;  /* Dark navy for navbar */
+  --header: #fff;  /* White text for headers */
+  --text-primary: #948979;  /* Primary text color - brown */
+  --text-secondary: #7a6d5d;  /* Secondary text color - darker brown */
+  --accent: #948979;  /* Accent color */
+  --accent-hover: #7a6d5d;  /* Accent hover color */
+  --accent-light: rgba(148, 137, 121, 0.1);  /* Light accent for backgrounds */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #948979;
+  color: var(--header);
+  padding: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.navbar a {
+  color: var(--header);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a:hover {
+  color: var(--accent);
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(187, 154, 247, 0.5);
+}
+
+.navbar-divider {
+  height: 5px;
+  background-color: white;
+  border: none;
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Global placeholder styling for all inputs and textareas */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(148, 137, 121, 0.6) !important;
+  opacity: 1 !important;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgba(148, 137, 121, 0.6) !important;
+  opacity: 1 !important;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: rgba(148, 137, 121, 0.6) !important;
+  opacity: 1 !important;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: rgba(148, 137, 121, 0.6) !important;
+  opacity: 1 !important;
+}

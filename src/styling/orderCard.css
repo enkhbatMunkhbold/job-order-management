@@ -1,0 +1,151 @@
+.order-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.order-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-button {
+  background-color: transparent;
+  color: rgba(148, 137, 121, 0.4);
+  border: 1px solid rgba(148, 137, 121, 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8);
+}
+
+.order-card:hover .edit-button {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.edit-button:hover {
+  background-color: transparent;
+  color: rgba(148, 137, 121, 0.6);
+  border-color: rgba(148, 137, 121, 0.5);
+  transform: scale(1.1);
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-in-progress {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.order-info {
+  margin-bottom: 16px;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+
+.info-item .label {
+  font-weight: 600;
+  color: #666;
+  min-width: 100px;
+  margin-right: 8px;
+}
+
+.info-item .value {
+  color: #333;
+  flex: 1;
+}
+
+.info-item .value.due-date {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.order-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.delete-button {
+  background-color: var(--text-primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover:not(:disabled) {
+  background-color: var(--text-secondary);
+}
+
+.delete-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.delete-button:disabled:hover {
+  background-color: #6c757d;
+} 
