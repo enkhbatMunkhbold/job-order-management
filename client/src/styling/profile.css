@@ -1,6 +1,6 @@
 .profile-container {
   padding: 5px;
-  max-width: 1200px;
+  max-width: 80%;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
 }
@@ -93,6 +93,84 @@
 }
 
 .create-option:hover {
+  background-color: var(--text-primary);
+  color: var(--header);
+}
+
+.separator-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
+.sort-button-container {
+  position: relative;
+}
+
+.sort-button {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sort-button:hover {
+  background-color: var(--text-primary);
+  color: var(--header);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(148, 137, 121, 0.3);
+}
+
+.sort-button.active {
+  background-color: var(--text-primary);
+  color: var(--header);
+  box-shadow: 0 2px 6px rgba(148, 137, 121, 0.2);
+}
+
+.sort-options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--header);
+  border: 2px solid var(--text-primary);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.sort-option {
+  width: 100%;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(148, 137, 121, 0.2);
+}
+
+.sort-option:last-child {
+  border-bottom: none;
+}
+
+.sort-option:hover {
   background-color: var(--text-primary);
   color: var(--header);
 }

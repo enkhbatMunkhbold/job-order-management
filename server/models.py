@@ -118,34 +118,6 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     
     return jobs_with_clients
 
-  # def get_user_orders(self, obj):
-  #   orders_data = []
-  #   for order in obj.orders:
-  #     order_data = {
-  #       'id': order.id,
-  #       'description': order.description,
-  #       'rate': order.rate,
-  #       'location': order.location,
-  #       'start_date': order.start_date.isoformat() if order.start_date else None,
-  #       'due_date': order.due_date.isoformat() if order.due_date else None,
-  #       'status': order.status,
-  #       'client': {
-  #         'id': order.client.id,
-  #         'name': order.client.name,
-  #         'email': order.client.email,
-  #         'phone': order.client.phone
-  #       },
-  #       'job': {
-  #         'id': order.job.id,
-  #         'title': order.job.title,
-  #         'category': order.job.category,
-  #         'description': order.job.description,
-  #         'duration': order.job.duration
-  #       }
-  #     }
-  #     orders_data.append(order_data)
-    
-  #   return orders_data
 
   @validates('email')
   def validate_email(self, value, **kargs):
@@ -306,6 +278,7 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
 
   id = auto_field(dump_only=True)
   description = auto_field(required=True)
+  rate = auto_field(required=True)
   location = auto_field(required=True)
   start_date = auto_field(required=True)
   due_date = auto_field(required=True)

@@ -1,357 +1,208 @@
-# Phase 4 Full-Stack Application Project Template
-
-## Learning Goals
-
-- Discuss the basic directory structure of a full-stack Flask/React application.
-- Carry out the first steps in creating your Phase 4 project.
-
----
-
-## Introduction
-
-Fork and clone this lesson for a template for your full-stack application. Take
-a look at the directory structure before we begin (NOTE: node_modules will be
-generated in a subsequent step):
+# Job Management App
 
-```console
-$ tree -L 2
-$ # the -L argument limits the depth at which we look into the directory structure
-.
-├── CONTRIBUTING.md
-├── LICENSE.md
-├── Pipfile
-├── README.md
-├── client
-│   ├── README.md
-│   ├── package.json
-│   ├── public
-│   └── src
-└── server
-    ├── app.py
-    ├── config.py
-    ├── models.py
-    └── seed.py
-```
+## Description 
 
-A `migrations` folder will be added to the `server` directory in a later step.
+The **Job Management App** helps users efficiently manage their job orders and related data, including Jobs and Clients. Users can create, edit, and delete Jobs, Clients, and Orders to suit their business needs. Each Order includes a **status** and a **due_day**, allowing users to stay organized and focused on specific tasks. Additionally, users can add notes to each Client's profile to keep track of special requirements or preferences for future reference.
 
-The `client` folder contains a basic React application, while the `server`
-folder contains a basic Flask application. You will adapt both folders to
-implement the code for your project .
+## Table Of Contents 
 
-NOTE: If you did not previously install `tree` in your environment setup, MacOS
-users can install this with the command `brew install tree`. WSL and Linux users
-can run `sudo apt-get install tree` to download it as well.
+- [Work Environment](#work-environment)
 
-## Where Do I Start?
+- [Login/Register](#loginregister)
 
-Just as with your Phase 3 Project, this will likely be one of the biggest
-projects you've undertaken so far. Your first task should be creating a Git
-repository to keep track of your work and roll back any undesired changes.
+- [Home](#home)
 
-### Removing Existing Git Configuration
+- [Profile](#profile)
 
-If you're using this template, start off by removing the existing metadata for
-Github and Canvas. Run the following command to carry this out:
+- [Job Card](#job-card)
 
-```console
-$ rm -rf .git .canvas
-```
+- [Client Card](#client-card)
 
-The `rm` command removes files from your computer's memory. The `-r` flag tells
-the console to remove _recursively_, which allows the command to remove
-directories and the files within them. `-f` removes them permanently.
+- [Create New Job](#create-new-job)
 
-`.git` contains this directory's configuration to track changes and push to
-Github (you want to track and push _your own_ changes instead), and `.canvas`
-contains the metadata to create a Canvas page from your Git repo. You don't have
-the permissions to edit our Canvas course, so it's not worth keeping around.
+- [Create New Client](#create-new-client)
 
-### Creating Your Own Git Repo
+- [Orders List](#orders-list)
+  
 
-First things first- rename this directory! Once you have an idea for a name,
-move one level up with `cd ..` and run
-`mv python-p4-project-template <new-directory-name>` to change its name (replace
-<new-directory-name> with an appropriate project directory name).
+## Work Environment  
 
-> **Note: If you typed the `mv` command in a terminal within VS Code, you should
-> close VS Code then reopen it.**
+The **Job Management App** is a full-stack web application built with **React** on the front end and **Flask** (Python) on the back end. On the front end, it utilizes the **useContext** hook to manage and share Jobs and User data across multiple components, enabling smooth and centralized state management.
 
-> **Note: `mv` actually stands for "move", but your computer interprets this
-> rename as a move from a directory with the old name to a directory with a new
-> name.**
+On the back end, the app is powered by the **Flask** framework, along with key tools such as **SQLAlchemy** for database interaction and **Marshmallow** for data serialization and validation.
 
-`cd` back into your new directory and run `git init` to create a local git
-repository. Add all of your local files to version control with `git add --all`,
-then commit them with `git commit -m'initial commit'`. (You can change the
-message here- this one is just a common choice.)
+The development servers run on different ports:
 
-Navigate to [GitHub](https://github.com). In the upper-right corner of the page,
-click on the "+" dropdown menu, then select "New repository". Enter the name of
-your local repo, choose whether you would like it to be public or private, make
-sure "Initialize this repository with a README" is unchecked (you already have
-one), then click "Create repository".
+ - The back end runs on port **5555**
 
-Head back to the command line and enter
-`git remote add origin git@github.com:github-username/new-repository-name.git`.
-NOTE: Replace `github-username` with your github username, and
-`new-repository-name` with the name of your new repository. This command will
-map the remote repository to your local repository. Finally, push your first
-commit with `git push -u origin main`.
-
-Your project is now version-controlled locally and online. This will allow you
-to create different versions of your project and pick up your work on a
-different machine if the need arises.
+ - The front end runs on port **3000**
 
----
+As a result, the app's pages can be accessed locally at the following URLs:  
 
-## Setup
+ - Signupt: - <http://localhost:3000/register>
 
-### `server/`
+ - Login: -<http://localhost:3000/login>
 
-The `server/` directory contains all of your backend code.
+ - Home: - <http://localhost:3000/home>
 
-`app.py` is your Flask application. You'll want to use Flask to build a simple
-API backend like we have in previous modules. You should use Flask-RESTful for
-your routes. You should be familiar with `models.py` and `seed.py` by now, but
-remember that you will need to use Flask-SQLAlchemy, Flask-Migrate, and
-SQLAlchemy-Serializer instead of SQLAlchemy and Alembic in your models.
+ - User Profile: -<http://localhost:3000/profile> 
 
-The project contains a default `Pipfile` with some basic dependencies. You may
-adapt the `Pipfile` if there are additional dependencies you want to add for
-your project.
+## Login/Register
 
-To download the dependencies for the backend server, run:
+When a user opens the app in the browser, the first screen they see is the **Register** page with a registration form. New users can fill out the form with a **valid username**, **email address**, and matching **password** and **password confirmation** to create an account.
 
-```console
-pipenv install
-pipenv shell
-```
+If the user already has an account, they can simply click on the Login option and sign in using their existing username and password.
 
-You can run your Flask API on [`localhost:5555`](http://localhost:5555) by
-running:
+## Home
 
-```console
-python server/app.py
-```
+After logging into the **Job Management App**, the user is redirected to the **Home page**. At the top of the page, a personalized message—"*Welcome, [Username]*"—is displayed, followed by a **Create New Job** button. The navigation bar at the top of the website contains two buttons: **Profile** and **Sign Out**, with the **Profile** button is highlighted to indicate the current page.
 
-Check that your server serves the default route `http://localhost:5555`. You
-should see a web page with the heading "Project Server".
+Below the button is a list of job cards on the market. Each card displays a **Job Title**, along with two buttons: **View Details** and **Create Order**.
 
-### `client/`
+ * Clicking **Create New Job** takes the user to the /new_job route, where they can add a new job.
 
-The `client/` directory contains all of your frontend code. The file
-`package.json` has been configured with common React application dependencies,
-include `react-router-dom`. The file also sets the `proxy` field to forward
-requests to `"http://localhost:5555". Feel free to change this to another port-
-just remember to configure your Flask app to use another port as well!
+ * Clicking **View Details** navigates to a page that shows more detailed information about the selected job.
 
-To download the dependencies for the frontend client, run:
+ * Clicking **Create Order** also redirects the user to the /new_job route, allowing them to create an order associated with that job.
 
-```console
-npm install --prefix client
-```
+## Profile
 
-You can run your React app on [`localhost:3000`](http://localhost:3000) by
-running:
+When the user clicks the **Profile** button in the navigation bar, they are redirected to the **Profile page**. At the same time, the **Profile** button in the navigation bar changes to **Home**, allowing the user to navigate back.
 
-```sh
-npm start --prefix client
-```
+At the top of the **Profile page**, the same personalized welcome message—“Welcome, [Username]”—is displayed. Below it are three buttons: **Show My Jobs**, **Show My Clients**, and **Create**. By default, the **Show My Jobs** button is highlighted when the user first lands on the page, and the highlight switches depending on which button is clicked.
 
-Check that your the React client displays a default page
-`http://localhost:3000`. You should see a web page with the heading "Project
-Client".
+A list of the user's own job cards is displayed below these buttons. When the user hovers over a job card, it animates slightly to indicate that it is active or focused.
 
-## Generating Your Database
-
-NOTE: The initial project directory structure does not contain the `instance` or
-`migrations` folders. Change into the `server` directory:
-
-```console
-cd server
-```
+## Job Card
 
-Then enter the commands to create the `instance` and `migrations` folders and
-the database `app.db` file:
+There are two types of Job Cards in the app—one displayed on the **Home** page and the other on the **Profile** page.
 
-```
-flask db init
-flask db upgrade head
-```
+🏠 **Home Page – Job Card**
+The Home page job card is minimal and displays only the job *Title* along with two buttons: *View Details* and *Create Order*.
 
-Type `tree -L 2` within the `server` folder to confirm the new directory
-structure:
+ - Clicking **View Details** navigates the user to a separate **Job Details** page where more information about the selected job is shown.
 
-```console
-.
-├── app.py
-├── config.py
-├── instance
-│   └── app.db
-├── migrations
-│   ├── README
-│   ├── __pycache__
-│   ├── alembic.ini
-│   ├── env.py
-│   ├── script.py.mako
-│   └── versions
-├── models.py
-└── seed.py
-```
+ - At the bottom of the **Job Details** page, there are two buttons: **Back To Profile** and **Create Order**.
 
-Edit `models.py` and start creating your models. Import your models as needed in
-other modules, i.e. `from models import ...`.
+   - **Back To Profile** returns the user to the **Profile** page. 
 
-Remember to regularly run
-`flask db revision --autogenerate -m'<descriptive message>'`, replacing
-`<descriptive message>` with an appropriate message, and `flask db upgrade head`
-to track your modifications to the database and create checkpoints in case you
-ever need to roll those modifications back.
+   - **Create Order** directs the user to the **Create New Order** page.
 
-> **Tip: It's always a good idea to start with an empty revision! This allows
-> you to roll all the way back while still holding onto your database. You can
-> create this empty revision with `flask db revision -m'Create DB'`.**
 
-If you want to seed your database, now would be a great time to write out your
-`seed.py` script and run it to generate some test data. Faker has been included
-in the Pipfile if you'd like to use that library.
+👤 **Profile Page – Job Card**
+The **Profile** page displays more advanced job cards that contain the same detailed information shown on the **Job Details** page, with additional features:
 
----
+ - At the bottom of each card, there is a *list of clients* who have placed orders for that job. Each client name is clickable and redirects the user to that client's detailed          information page.
 
-#### `config.py`
+ - Below the client list, there are two buttons:
 
-When developing a large Python application, you might run into a common issue:
-_circular imports_. A circular import occurs when two modules import from one
-another, such as `app.py` and `models.py`. When you create a circular import and
-attempt to run your app, you'll see the following error:
+   - **View Orders** – navigates to the Orders page for that specific job.
 
-```console
-ImportError: cannot import name
-```
+   - **Trash** – deletes the job from the user's personal list.
 
-If you're going to need an object in multiple modules like `app` or `db`,
-creating a _third_ module to instantiate these objects can save you a great deal
-of circular grief. Here's a good start to a Flask config file (you may need more
-if you intend to include features like authentication and passwords):
+     - Note: Deleting a job from the profile removes it only from the user’s own jobs—it does **not** remove it from the general job list available on the market.
 
-```py
-# Standard library imports
+ - When the user hovers over a job card, an **Edit** button appears in the top-left corner.
 
-# Remote library imports
-from flask import Flask
-from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+   - Clicking Edit navigates to the Edit Job page.
 
-# Local imports
+   - **Note:** Editing a job will apply changes to the job universally—whether it's viewed in the market or in the user's profile.
 
-# Instantiate app, set attributes
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+## Client Card  
 
-# Define metadata, instantiate db
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
-db = SQLAlchemy(metadata=metadata)
-migrate = Migrate(app, db)
-db.init_app(app)
+When a user clicks the **Show My Clients** button on the **Profile** page, a list of client cards is displayed. These cards are visually similar to the job cards, but instead show client-specific information.
 
-# Instantiate REST API
-api = Api(app)
+Each client card includes a *list of jobs* that the client has ordered—note that this is not a *list of clients*, but rather a list of related jobs. Each job in the list is clickable, and selecting one displays detailed information about the chosen client.
 
-# Instantiate CORS
-CORS(app)
+At the bottom of each client card are two buttons:
 
-```
+ - **View Orders**-navigates to the list of orders associated with that specific client.
 
-Now let's review that last line...
+ - **Trash**-deletes the client.
 
-#### CORS
+> **Important:** Since the client list belongs exclusively to the user, deleting a client will **permanently remove** that client from the entire system—not just from the user's profile.
 
-CORS (Cross-Origin Resource Sharing) is a system that uses HTTP headers to
-determine whether resources from different servers-of-origin can be accessed. If
-you're using the fetch API to connect your frontend to your Flask backend, you
-need to configure CORS on your Flask application instance. Lucky for us, that
-only takes one line:
+## Create New Job
 
-```py
-CORS(app)
+➕ Creating a **New Job**
+There are two ways for a user to create a new job in the **Job Management App**:
 
-```
+From the **Home Page**:
+On the **Home** page, directly below the welcome message, there is a **Create New Job** button. Clicking this button takes the user to the **Create New Job** page.
 
-By default, Flask-CORS enables CORS on all routes in your application with all
-fetching servers. You can also specify the resources that allow CORS. The
-following specifies that routes beginning with `api/` allow CORS from any
-originating server:
+From the **Profile Page**:
+On the **Profile** page, there is a **Create** button. Clicking it reveals a dropdown menu with two options: **New Job** and **New Client**. Selecting **New Job** also navigates the user to the **Create New Job** page.
 
-```py
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+📝 **Create New Job** page
+On the **Create New Job** page, the user is presented with a form containing labeled fields to enter all the necessary details about the job.
 
-```
+At the top of the form is a **Back to Profile** button, which takes the user back to the **Profile** page.
 
-You can also set this up resource-by-resource by importing and using the
-`@cross_origin` decorator:
+At the bottom of the form are two buttons:
 
-```py
-@app.route("/")
-@cross_origin()
-def howdy():
-  return "Howdy partner!"
+ - **Cancel** – navigates the user back to the **Profile** page.
 
-```
+ - **Create Job** – submits the form and redirects the user to the **Home** page, where the newly created job will appear.
 
----
+## Create new Client
 
-## Updating Your README.md
+➕ **Creating a New Client**
+Creating a new client follows the same process as creating a new job, with a few key differences.
 
-`README.md` is a Markdown file that describes your project. These files can be
-used in many different ways- you may have noticed that we use them to generate
-entire Canvas lessons- but they're most commonly used as homepages for online
-Git repositories. **When you develop something that you want other people to
-use, you need to have a README.**
+To create a new client, the user should click the **Create** button located just below the welcome message on the **Profile** page. From the dropdown menu that appears, selecting **New Client** navigates the user to the **Create New Client** page.
 
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this lesson's resources for a basic guide to Markdown.
+On this page, the user is presented with a form containing fields for all the necessary information about the new client.
 
-### What Goes into a README?
+At the bottom of the form are three buttons:
 
-This README should serve as a template for your own- go through the important
-files in your project and describe what they do. Each file that you edit (you
-can ignore your migration files) should get at least a paragraph. Each function
-should get a small blurb.
+ - **Back to Profile**
 
-You should descibe your application first, and with a good level of detail. The
-rest should be ordered by importance to the user. (Probably routes next, then
-models.)
+ - **Cancel**
 
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
+ - **Create Client**
 
----
+All three buttons redirect the user to the **Profile** page. However:
 
-## Conclusion
+ - **Back to Profile** and **Cancel** return the user without saving any new data.
 
-A lot of work goes into a full-stack application, but it all relies on concepts
-that you've practiced thoroughly throughout this phase. Hopefully this template
-and guide will get you off to a good start with your Phase 4 Project.
+ - **Create Client** submits the form and adds the new client to the user’s client list.
 
-Happy coding!
 
----
+## Orders List
 
-## Resources
+📋 **Viewing the Orders List**
+There are two ways to view an **Orders List** in the **Job Management App**, depending on whether the orders are related to a **job** or a **client**.
 
-- [Setting up a respository - Atlassian](https://www.atlassian.com/git/tutorials/setting-up-a-repository)
-- [Create a repo- GitHub Docs](https://docs.github.com/en/get-started/quickstart/create-a-repo)
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
-- [Python Circular Imports - StackAbuse](https://stackabuse.com/python-circular-imports/)
-- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
+
+1. 🧰 **Orders List for a Specific Job**
+To view orders associated with a particular job:
+
+    - Navigate to the **Profile** page and click the **Show My Jobs** button.
+
+    - A list of job cards will appear, each with a **View Orders** button at the bottom.
+
+    - Clicking this button takes the user to a page displaying all orders related to that job.
+
+
+2. 👤 **Orders List for a Specific Client**
+To view orders associated with a specific client:
+
+    - From the **Profile** page, click the **Show My Clients** button.
+
+    - A list of client cards will be displayed, each also containing a **View Orders** button.
+
+    - Clicking this button takes the user to a page listing all orders placed by that client.
+
+
+🧾 **Order Card Details**
+Each **Order Card** displays all the essential information about the order, including:
+
+  - The **status** of the order, which is highlighted in different colors to visually represent its current state (e.g., pending, in progress, completed).
+
+  - The **Due Date**, which is shown in **red** to immediately draw the user's attention.
+
+  - A **Delete** button is located at the bottom of the card.
+
+    - If the order's status is **"in progress"**, the **Delete** button is **disabled** to prevent accidental removal.
+
+    - For all other statuses, the button remains enabled and allows the user to delete the order.
