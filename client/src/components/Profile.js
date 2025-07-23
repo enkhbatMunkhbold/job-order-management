@@ -250,13 +250,13 @@ const Profile = () => {
             {showSortOptions && (
               <div className="sort-options">
                 <button className="sort-option" onClick={() => handleSortBy('')}>
-                  No Sort
+                  Default
                 </button>
                 <button className="sort-option" onClick={() => handleSortBy('status')}>
                   Status
                 </button>
                 <button className="sort-option" onClick={() => handleSortBy('due_date')}>
-                  Due Date
+                  Urgency
                 </button>
                 <button className="sort-option" onClick={() => handleSortBy('rate')}>
                   Rate

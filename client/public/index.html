@@ -13,6 +13,25 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <!-- Add this to your HTML head -->
+    <script async defer 
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: { lat: -34.397, lng: 150.644 }
+        });
+      
+        // Add markers, info windows, etc.
+        const marker = new google.maps.Marker({
+          position: { lat: -34.397, lng: 150.644 },
+          map: map,
+        });
+      }
+    </script>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/

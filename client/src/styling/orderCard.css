@@ -119,6 +119,24 @@
   font-weight: 500;
 }
 
+.location-clickable {
+  cursor: pointer;
+  color: #333 !important;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location-clickable:hover {
+  color: #2563eb !important;
+  transform: translateY(-1px);
+}
+
+.location-clickable:active {
+  transform: translateY(0);
+}
+
 .order-actions {
   display: flex;
   gap: 8px;
