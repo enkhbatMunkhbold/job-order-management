@@ -311,14 +311,4 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
     allowed_statuses = ['pending', 'in progress', 'completed', 'canceled']
     if value.lower() not in allowed_statuses:
       raise ValidationError(f"Status must be one of: {', '.join(allowed_statuses)}")
-    
-  @validates('start_date')
-  def validate_start_date(self, value, **kwargs):
-    if value < date.today():
-      raise ValidationError('Start date must be in the future')
-    
-  @validates('due_date')
-  def validate_due_date(self, value, **kwargs):
-    if value <= date.today():
-      raise ValidationError("Due date can't be today or before today")
 

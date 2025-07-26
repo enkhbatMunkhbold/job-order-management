@@ -26,6 +26,38 @@ const NewOrder = () => {
 
   const job = jobs.find(j => j.id === parseInt(jobId)) || {}
 
+  // Function to add event to Google Calendar
+  const addToGoogleCalendar = (startDate, dueDate, description, location, clientName) => {
+    if (!startDate) {
+      alert('Please select a start date first');
+      return;
+    }
+
+    // Format the dates for Google Calendar
+    const startDateTime = new Date(startDate);
+    const dueDateTime = new Date(dueDate);
+    
+    // Set default times (9 AM for start, 5 PM for due date)
+    startDateTime.setHours(9, 0, 0, 0);
+    dueDateTime.setHours(17, 0, 0, 0);
+
+    // Create Google Calendar URL with all form data
+    const eventDetails = {
+      text: `Start: ${job.title} - ${description}`,
+      dates: `${startDateTime.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}/Z/${dueDateTime.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}/Z`,
+      details: `Job: ${job.title}\nDescription: ${description}\nClient: ${clientName}\nLocation: ${location}\nStart Date: ${new Date(startDate).toLocaleDateString()}\nDue Date: ${new Date(dueDate).toLocaleDateString()}\nDuration: ${job.duration || 'Not specified'}`,
+      location: location,
+      trp: false,
+      sf: true,
+      output: 'xml'
+    };
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.text)}&dates=${eventDetails.dates}&details=${encodeURIComponent(eventDetails.details)}&location=${encodeURIComponent(eventDetails.location)}&sf=true&output=xml`;
+
+    // Open Google Calendar in new tab
+    window.open(googleCalendarUrl, '_blank');
+  };
+
   const formik = useFormik({
     initialValues: {
       description: "",
@@ -91,6 +123,9 @@ const NewOrder = () => {
       })
     }
   })
+
+  // Get selected client name for calendar event
+  const selectedClient = clients.find(client => client.id === parseInt(formik.values.client_id));
 
   if (!job.id) {
     return (
@@ -200,16 +235,34 @@ const NewOrder = () => {
 
           <div className="form-group">
             <label htmlFor="start_date">Start Date *</label>
-            <input
-              type="date"
-              id="start_date"
-              name="start_date"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.start_date}
-              min={new Date().toISOString().split('T')[0]}
-              className={formik.touched.start_date && formik.errors.start_date ? 'error' : ''}
-            />
+            <div className="date-input-container">
+              <input
+                type="date"
+                id="start_date"
+                name="start_date"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.start_date}
+                min={new Date().toISOString().split('T')[0]}
+                className={formik.touched.start_date && formik.errors.start_date ? 'error' : ''}
+              />
+              {formik.values.start_date && formik.values.due_date && formik.values.description && formik.values.location && selectedClient && (
+                <button
+                  type="button"
+                  className="calendar-button"
+                  onClick={() => addToGoogleCalendar(
+                    formik.values.start_date,
+                    formik.values.due_date,
+                    formik.values.description,
+                    formik.values.location,
+                    selectedClient.name
+                  )}
+                  title="Add to Google Calendar"
+                >
+                  📅 Add to Calendar
+                </button>
+              )}
+            </div>
             {formik.touched.start_date && formik.errors.start_date && (
               <div className="error-message">{formik.errors.start_date}</div>
             )}

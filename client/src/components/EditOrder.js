@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import * as Yup from 'yup'
@@ -9,8 +9,41 @@ const EditOrder = () => {
   const navigate = useNavigate()
   const { orderId } = useParams()
   const { user, refreshUser } = useContext(UserContext)
+  const [ originalStartDate, setOriginalStartDate ] = useState('')
+  const [ hasStartDateChanged, setHasStartDateChanged ] = useState(false)
 
   const order = user.orders.find(or => or.id === parseInt(orderId))
+
+  // Store the original start date when component mounts
+  useEffect(() => {
+    if (order?.start_date) {
+      const originalDate = new Date(order.start_date).toISOString().split('T')[0]
+      setOriginalStartDate(originalDate)
+    }
+  }, [order])
+
+  // Create dynamic validation schema based on current state
+  const validationSchema = useMemo(() => {
+    return Yup.object({
+      description: Yup.string()
+        .min(5, 'Description must be at least 5 characters')
+        .required('Description is required'),
+      rate: Yup.string()
+        .min(10, 'Rate must be at least 10 characters')
+        .required('Rate is required'),
+      location: Yup.string()
+        .min(10, 'Location must be at least 10 characters')
+        .required('Location is required'),
+      start_date: Yup.date()
+        .required('Start date is required'),
+      due_date: Yup.date()
+        .min(Yup.ref('start_date'), 'Due date must be after start date')
+        .required('Due date is required'),
+      status: Yup.string()
+        .oneOf(['pending', 'in progress', 'completed', 'canceled'], 'Invalid status')
+        .required('Status is required')
+    })
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -22,50 +55,49 @@ const EditOrder = () => {
       status: order?.status || 'pending'
     },
     enableReinitialize: true,
-    validationSchema: Yup.object({
-      description: Yup.string()
-        .min(5, 'Description must be at least 5 characters')
-        .required('Description is required'),
-      rate: Yup.string()
-        .min(10, 'Rate must be at least 10 characters')
-        .required('Rate is required'),
-      location: Yup.string()
-        .min(10, 'Location must be at least 10 characters')
-        .required('Location is required'),
-      start_date: Yup.date()
-        .min(new Date(), 'Start date must be in the future')
-        .required('Start date is required'),
-      due_date: Yup.date()
-        .min(Yup.ref('start_date'), 'Due date must be after start date')
-        .required('Due date is required'),
-      status: Yup.string()
-        .oneOf(['pending', 'in progress', 'completed', 'canceled'], 'Invalid status')
-        .required('Status is required')
-    }),
+    validationSchema,
     onSubmit: async (values) => {
       try {
+        // Convert dates to ISO string format for server
+        const submitData = {
+          ...values,
+          start_date: values.start_date ? new Date(values.start_date).toISOString().split('T')[0] : null,
+          due_date: values.due_date ? new Date(values.due_date).toISOString().split('T')[0] : null
+        }
+        
+        // console.log('Submitting values:', submitData) // Debug log
+        
         const response = await fetch(`/orders/${orderId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
-          body: JSON.stringify(values)
+          body: JSON.stringify(submitData)
         })
 
         if (!response.ok) {
           const errorData = await response.json()
-          throw new Error(errorData.error || 'Failed to update order')
+          // console.log('Server error response:', errorData) // Debug log
+          throw new Error(errorData.error || errorData.message || JSON.stringify(errorData))
         }
 
         await refreshUser()
         navigate('/profile')
       } catch (err) {
         console.error('Error updating order:', err)
+        console.error('Error details:', err.message)
         alert('Failed to update order: ' + err.message)
       }
     }
   })
+
+  // Track if start date has been changed
+  const handleStartDateChange = (e) => {
+    const newDate = e.target.value
+    setHasStartDateChanged(newDate !== originalStartDate)
+    formik.handleChange(e)
+  }
 
   return (
     <div className="new-order-container">
@@ -134,13 +166,18 @@ const EditOrder = () => {
               type="date"
               id="start_date"
               name="start_date"
-              onChange={formik.handleChange}
+              onChange={handleStartDateChange}
               onBlur={formik.handleBlur}
               value={formik.values.start_date}
               className={formik.touched.start_date && formik.errors.start_date ? 'error' : ''}
             />
             {formik.touched.start_date && formik.errors.start_date && (
               <div className="error-message">{formik.errors.start_date}</div>
+            )}
+            {hasStartDateChanged && (
+              <div className="info-message">
+                Note: You've changed the start date. New dates must be in the future.
+              </div>
             )}
           </div>
 
