@@ -23,6 +23,8 @@ The **Job Order Management** helps users efficiently manage their job orders and
 - [Create New Client](#create-new-client)
 
 - [Orders List](#orders-list)
+
+- [Create New Order](#create-new-order)
   
 
 ## Work Environment  
@@ -206,3 +208,12 @@ Each **Order Card** displays all the essential information about the order, incl
     - If the order's status is **"in progress"**, the **Delete** button is **disabled** to prevent accidental removal.
 
     - For all other statuses, the button remains enabled and allows the user to delete the order.
+
+
+## Create New Order
+
+To create a new order, the user should return to the **Home** page and select the job to which the order will be linked. Then, click the **Create Order** button. This will redirect the user to the **Create New Order** page, which displays the job details and includes a **New Order** form.
+
+Once all fields in the form are filled out, an **Add to Calendar** button will appear next to the **Start Date** field. Clicking this button allows the user to add the new order, along with all its details, to their **Google Calendar**.
+
+After completing all required fields, the user can finalize the process by clicking the **Create Order** button at the bottom of the form. This action will navigate them to the **Profile** page, where the list of orders is displayed by default. Alternatively, the user can cancel the process at any time by clicking the **Cancel** button, which will redirect them back to the **Home** page.
