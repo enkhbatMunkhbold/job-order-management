@@ -1,8 +1,8 @@
-# Job Management App
+# Job Order Management
 
 ## Description 
 
-The **Job Management App** helps users efficiently manage their job orders and related data, including Jobs and Clients. Users can create, edit, and delete Jobs, Clients, and Orders to suit their business needs. Each Order includes a **status** and a **due_day**, allowing users to stay organized and focused on specific tasks. Additionally, users can add notes to each Client's profile to keep track of special requirements or preferences for future reference.
+The **Job Order Management** helps users efficiently manage their job orders and related data, including Jobs and Clients. Users can create, edit, and delete Jobs, Clients, and Orders to suit their business needs. Each Order includes a **status** and a **due_day**, allowing users to stay organized and focused on specific tasks. Additionally, users can add notes to each Client's profile to keep track of special requirements or preferences for future reference.
 
 ## Table Of Contents 
 
@@ -27,7 +27,7 @@ The **Job Management App** helps users efficiently manage their job orders and r
 
 ## Work Environment  
 
-The **Job Management App** is a full-stack web application built with **React** on the front end and **Flask** (Python) on the back end. On the front end, it utilizes the **useContext** hook to manage and share Jobs and User data across multiple components, enabling smooth and centralized state management.
+The **Job Order Management** is a full-stack web application built with **React** on the front end and **Flask** (Python) on the back end. On the front end, it utilizes the **useContext** hook to manage and share Jobs and User data across multiple components, enabling smooth and centralized state management.
 
 On the back end, the app is powered by the **Flask** framework, along with key tools such as **SQLAlchemy** for database interaction and **Marshmallow** for data serialization and validation.
 
@@ -55,7 +55,7 @@ If the user already has an account, they can simply click on the Login option an
 
 ## Home
 
-After logging into the **Job Management App**, the user is redirected to the **Home page**. At the top of the page, a personalized message—"*Welcome, [Username]*"—is displayed, followed by a **Create New Job** button. The navigation bar at the top of the website contains two buttons: **Profile** and **Sign Out**, with the **Profile** button is highlighted to indicate the current page.
+After logging into the **Job Order Management**, the user is redirected to the **Home page**. At the top of the page, a personalized message—"*Welcome, [Username]*"—is displayed, followed by a **Create New Job** button. The navigation bar at the top of the website contains two buttons: **Profile** and **Sign Out**, with the **Profile** button is highlighted to indicate the current page.
 
 Below the button is a list of job cards on the market. Each card displays a **Job Title**, along with two buttons: **View Details** and **Create Order**.
 
@@ -125,7 +125,7 @@ At the bottom of each client card are two buttons:
 ## Create New Job
 
 ➕ Creating a **New Job**
-There are two ways for a user to create a new job in the **Job Management App**:
+There are two ways for a user to create a new job in the **Job Order Management**:
 
 From the **Home Page**:
 On the **Home** page, directly below the welcome message, there is a **Create New Job** button. Clicking this button takes the user to the **Create New Job** page.
@@ -171,7 +171,7 @@ All three buttons redirect the user to the **Profile** page. However:
 ## Orders List
 
 📋 **Viewing the Orders List**
-There are two ways to view an **Orders List** in the **Job Management App**, depending on whether the orders are related to a **job** or a **client**.
+There are two ways to view an **Orders List** in the **Job Order Management**, depending on whether the orders are related to a **job** or a **client**.
 
 
 1. 🧰 **Orders List for a Specific Job**
