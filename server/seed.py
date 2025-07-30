@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice as rc
+from random import choice as rc
 from datetime import date, timedelta
 
 # Remote library imports
