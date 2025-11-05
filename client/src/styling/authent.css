@@ -1,12 +1,13 @@
 .auth-container {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 40px);
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: transparent;
   padding: 2.5rem;
   width: 100%;
   max-width: 400px;
+  z-index: 1;
 }
 
 .auth-form {

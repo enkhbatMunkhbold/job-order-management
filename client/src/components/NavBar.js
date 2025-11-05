@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <h1>JOB MANAGEMENT APP</h1>
-      {user && (
+      {user ? (
         <div className="nav-buttons">
           <button className="nav-button home_button" onClick={handleHome}>
             {profile ? 'Profile' : 'Home'}
@@ -39,7 +39,7 @@ const NavBar = () => {
             Sign Out
           </button>
         </div>        
-      )}
+      ) : null}
       <hr className="navbar-divider" />
     </nav>
   )
