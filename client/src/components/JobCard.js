@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "../styling/jobCard.css";
 
 const JobCard = ({ job, showDetails = false, onDelete, onEdit }) => {
+
+  const uniqueClients = [...new Map(job.clients.map(client => [client.id, client])).values()]
  
   return (
     <div className={`job-card ${showDetails ? 'job-card-detailed' : ''}`}>
@@ -37,16 +39,16 @@ const JobCard = ({ job, showDetails = false, onDelete, onEdit }) => {
                   <span className="value">{job.duration}</span>
                 </div>
               )}
-              {job.clients && job.clients.length > 0 && (
+              {uniqueClients && uniqueClients.length > 0 && (
                 <div className="info-item">
                   <span className="label">Clients:</span>
                   <span className="value">
-                    {job.clients.map((client, index) => (
+                    {uniqueClients.map((client, index) => (
                       <span key={client.id}>
                         <Link to={`/clients/${client.id}`} className="client-link">
                           {client.name}
                         </Link>
-                        {index < job.clients.length - 1 ? ', ' : ''}
+                        {index < uniqueClients.length - 1 ? ', ' : ''}
                       </span>
                     ))}
                   </span>
